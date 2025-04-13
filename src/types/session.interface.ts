@@ -1,6 +1,6 @@
 export interface ISession {
     id: number,
-    userId: number,
+    userId: bigint,
     botId: number,
     currentBlock: string,
     isFinished: boolean,
@@ -8,7 +8,7 @@ export interface ISession {
 }
 
 export interface ISessionCreate {
-    userId: number,
+    userId: bigint,
     botId: number,
     currentBlock: string,
     lastInteractionAt?: Date

@@ -4,7 +4,7 @@ import { ISession, ISessionCreate } from '../types/session.interface'
 class SessionModel extends AbstractModel {
     private model = this.prisma.userSessions
 
-    public async getActiveSession(userId: number, botId: number): Promise<ISession | null> {
+    public async getActiveSession(userId: bigint, botId: number): Promise<ISession | null> {
         return await this.model.findFirst({
             where: {
                 userId,

@@ -47,7 +47,7 @@ model UserSessions {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  userId            Int
+  userId            BigInt
   bot               Bots     @relation(fields: [botId], references: [id])
   botId             Int
   currentBlock      String

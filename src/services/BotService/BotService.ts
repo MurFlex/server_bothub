@@ -24,11 +24,12 @@ class BotService {
 
     public async handleMessage(message: TelegramBot.Message) {
         const chatId = message.chat.id
-        const userId = message.from?.id
 
-        if(!userId) {
+        if (!message.from?.id) {
             return
         }
+
+        const userId = BigInt(message.from.id)
 
         let session = await SessionModel.getActiveSession(userId, this.config.id)
 
