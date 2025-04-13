@@ -1,6 +1,5 @@
 generator client {
   provider = "prisma-client-js"
-  binaryTargets = ["native", "linux-musl"]
 }
 
 datasource db {
@@ -16,4 +15,42 @@ model User {
   email         String  @unique
   password      String
   refresh_token String?
+}
+
+model Bots {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  name         String
+  start_block  String         @default("start")
+  token        String
+  isRunning    Boolean        @default(false)
+  BotsBlocks   BotsBlocks[]
+  UserSessions UserSessions[]
+}
+
+model BotsBlocks {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  bot    Bots   @relation(fields: [botId], references: [id])
+  botId  Int
+  key    String
+  type   String
+  config Json
+}
+
+model UserSessions {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  userId            Int
+  bot               Bots     @relation(fields: [botId], references: [id])
+  botId             Int
+  currentBlock      String
+  isFinished        Boolean
+  lastInteractionAt DateTime @default(now())
 }

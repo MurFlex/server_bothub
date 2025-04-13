@@ -8,6 +8,7 @@ import AuthRoutes from './routes/AuthRoutes'
 import UserRoutes from './routes/UserRoutes'
 import { errors } from 'celebrate'
 import BotRoutes from './routes/BotRoutes'
+import botServiceManager from './services/BotService/BotServiceManager'
 
 dotenv.config()
 
@@ -26,6 +27,8 @@ async function main() {
     app.use(notFound)
     app.use(errors())
     app.use(errorHandler)
+
+    await botServiceManager.startAllBots()
 
     app.listen(port, () => {
         console.log(`[server]: Server is running at http://localhost:${port}`)

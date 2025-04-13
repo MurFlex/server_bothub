@@ -46,6 +46,7 @@ export default [
       'prefer-template': 'error',
       'arrow-body-style': ['error', 'as-needed'],
       ...tseslint.configs.recommended.rules,
+      "@typescript-eslint/no-explicit-any": "off"
     },
   },
 ]
